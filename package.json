@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/shd101wyy/qubit.js/issues"
   },
-  "homepage": "https://github.com/shd101wyy/qubit.js#readme"
+  "homepage": "https://github.com/shd101wyy/qubit.js#readme",
+  "dependencies": {
+    "mathjs": "^3.9.3"
+  }
 }
