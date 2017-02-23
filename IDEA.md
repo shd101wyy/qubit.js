@@ -21,7 +21,7 @@ qc
   .toQASM() // convert to qasm
 
 qc
-  .reboot() // clear everything
+  .boot(2, 2) // clear everything and reboot
 
 qc.executeQASM(`
   qreg q[2]
