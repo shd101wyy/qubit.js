@@ -1,8 +1,11 @@
 const QuantumComputing = require('./lib/qubit.js')
+const math = require('mathjs')
 
 const qc = new QuantumComputing(1, 1)
 qc
-  .boot(1)
+  .boot(2)
   .h(0)
-  .measure(0)
-  .print()
+  .s(1)
+  .measure()
+
+qc.print()
