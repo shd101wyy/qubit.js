@@ -1,5 +1,6 @@
 # qubit.js
-A simple quantum computing circuit simulator (working on progress)
+A simple quantum computing circuit simulator (working on progress)  
+**Not Finished yet!**
 
 ## Install  
 **node.js**  
@@ -33,19 +34,25 @@ console.log(qc.getResult()) // print probabilities
 
 ## API  
 * **boot(qubitRegsNum, classicRegNum=qubitRegsNum)** init quantum computing circuit.  
-* **id(offset|'all')** apply Identity Gate to qubits[offset] or all qubits.       
-* **x(offset|'all')** apply Pauli X Gate to qubits[offset] or all qubits.  
-* **y(offset|'all')** apply Pauli Y Gate to qubits[offset] or all qubits.  
-* **z(offset|'all')** apply Pauli Z Gate to qubits[offset] or all qubits.  
-* **s(offset|'all')** apply Phase Gate to qubits[offset] or all qubits.  
-* **sdg(offset|'all')** apply Phase Gate to qubits[offset] or all qubits.  
-* **h(offset|'all')** apply Hadamard Gate to qubits[offset] or all qubits.    
+* **applySingleBitMatrix(offset, matrix)** apply matrix to qubits[offset].  
+* **applyTwoBitsMatrix(control, target, matrix)** apply matrix to qubits[control] and qubits[target].    
+* **id(offset || 'all')** apply Identity Gate to qubits[offset] or all qubits.       
+* **x(offset || 'all')** apply Pauli X Gate to qubits[offset] or all qubits.  
+* **y(offset || 'all')** apply Pauli Y Gate to qubits[offset] or all qubits.  
+* **z(offset || 'all')** apply Pauli Z Gate to qubits[offset] or all qubits.  
+* **s(offset || 'all')** apply Phase Gate to qubits[offset] or all qubits.  
+* **sdg(offset || 'all')** apply Phase Gate to qubits[offset] or all qubits.  
+* **t(offset || 'all')** apply Phase Gate to qubits[offset] or all qubits.  
+* **tdg(offset || 'all')** apply Phase Gate to qubits[offset] or all qubits.  
+* **h(offset || 'all')** apply Hadamard Gate to qubits[offset] or all qubits.    
 * **cnot(control, target)** apply Controlled Gate to qubits[control] and qubits[target].
 * **cx(control, target)** apply Controlled Gate to qubits[control] and qubits[target].
-* **measure(q|'all', c)** measure qubits[q] to classicReg[c] or measure one-to-one.   
-* **getResult()** get result after measurement.  
+* **measure(q || 'all', c)** measure qubits[q] to classicReg[c] or measure one-to-one.   
+* **getResult()** get result after measurement.    
 * **toQASM()** convert to `QASM 2.0` code.  
 * **executeQASM(code)** execute `QASM 2.0 code`.  
+
+For more information, read [qubit.js source code](./lib/qubit.js).
 
 ## References
 [A bunch of materials](http://www.vcpc.univie.ac.at/~ian/hotlist/qc/intro.shtml)  
