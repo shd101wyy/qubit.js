@@ -1,6 +1,52 @@
 # qubit.js
 A simple quantum computing circuit simulator (working on progress)
 
+## Install  
+**node.js**  
+```sh  
+npm install qubit.js
+```  
+
+**browser**  
+```html  
+<script src="qubit.min.js"></script>
+```
+
+## Build  
+```sh
+npm install  
+./build.sh
+```
+
+## Usages  
+```javascript  
+const {QuantumComputing} = require('./lib/qubit.js')
+const qc = new QuantumComputing()
+qc
+  .boot(1)   // create one qubit register
+  .x(0)      // apply Pauli X Gate to qubit[0]
+  .measure() // measure all
+
+console.log(qc.toQASM())    // convert to QASM code  
+console.log(qc.getResult()) // print probabilities  
+```
+
+## API  
+* **boot(qubitRegsNum, classicRegNum=qubitRegsNum)** init quantum computing circuit.  
+* **id(offset|'all')** apply Identity Gate to qubits[offset] or all qubits.       
+* **x(offset|'all')** apply Pauli X Gate to qubits[offset] or all qubits.  
+* **y(offset|'all')** apply Pauli Y Gate to qubits[offset] or all qubits.  
+* **z(offset|'all')** apply Pauli Z Gate to qubits[offset] or all qubits.  
+* **s(offset|'all')** apply Phase Gate to qubits[offset] or all qubits.  
+* **sdg(offset|'all')** apply Phase Gate to qubits[offset] or all qubits.  
+* **h(offset|'all')** apply Hadamard Gate to qubits[offset] or all qubits.    
+* **cnot(control, target)** apply Controlled Gate to qubits[control] and qubits[target].
+* **cx(control, target)** apply Controlled Gate to qubits[control] and qubits[target].
+* **measure(q|'all', c)** measure qubits[q] to classicReg[c] or measure one-to-one.   
+* **getResult()** get result after measurement.  
+* **toQASM()** convert to `QASM 2.0` code.  
+* **executeQASM(code)** execute `QASM 2.0 code`.  
+
 ## References
 [A bunch of materials](http://www.vcpc.univie.ac.at/~ian/hotlist/qc/intro.shtml)  
 [A gentle introduction to quantum computing](http://physlab.org/wp-content/uploads/2016/03/Abdullah-Khalid.pdf)  
