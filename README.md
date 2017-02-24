@@ -47,6 +47,7 @@ console.log(qc.getResult()) // print probabilities
 * **h(offset || 'all')** apply Hadamard Gate to qubits[offset] or all qubits.    
 * **cnot(control, target)** apply Controlled Gate to qubits[control] and qubits[target].
 * **cx(control, target)** apply Controlled Gate to qubits[control] and qubits[target].
+* **barrier(offsets=[] || 'all')** the barrier prevents transformations accross this source line.
 * **measure(q || 'all', c)** measure qubits[q] to classicReg[c] or measure one-to-one.   
 * **getResult()** get result after measurement.    
 * **toQASM()** convert to `QASM 2.0` code.  
