@@ -622,3 +622,32 @@ console.log(qc.getResult())
 { bitString: '111', probability: 0.24999999999999967 } ]
  */
 ```
+
+**[Shor's algorithm](https://quantumexperience.ng.bluemix.net/qstage/#/tutorial?sectionId=8443c4f713521c10b1a56a533958286b&pageIndex=6)**  
+
+**Multi7x4Mod15**
+
+```{javascript cmd:"node", continue:"izhslyj4", id:"Multi7x4Mod15"}
+qc
+  .boot(4)
+  .x(1)
+  .x('all')
+  .cnot(2, 1)
+  .cnot(1, 2)
+  .cnot(2, 1)
+  .cnot(1, 0)
+  .cnot(0, 1)
+  .cnot(1, 0)
+  .cnot(3, 0)
+  .cnot(0, 3)
+  .cnot(3, 0)
+  .measure()
+
+console.log('\n==================  QASM  ==================')
+console.log(qc.toQASM())
+console.log('\n================== Result ==================')
+console.log(qc.getResult())
+/*
+[ { bitString: '1011', probability: 1 } ]
+ */
+```
