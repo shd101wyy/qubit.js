@@ -1,5 +1,5 @@
 # qubit.js
-A simple quantum computing circuit simulator (working on progress)  
+A simple quantum computing circuit simulator (working in progress)  
 **Not Finished yet!**
 
 ## Install  
