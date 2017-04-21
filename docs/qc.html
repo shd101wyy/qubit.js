@@ -1,0 +1,2392 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>qc</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+<style>
+/*!
+ * reveal.js
+ * http://lab.hakim.se/reveal-js
+ * MIT licensed
+ *
+ * Copyright (C) 2016 Hakim El Hattab, http://hakim.se
+ */
+/*********************************************
+ * RESET STYLES
+ *********************************************/
+html, body, .reveal div, .reveal span, .reveal applet, .reveal object, .reveal iframe,
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6, .reveal p, .reveal blockquote, .reveal pre,
+.reveal a, .reveal abbr, .reveal acronym, .reveal address, .reveal big, .reveal cite, .reveal code,
+.reveal del, .reveal dfn, .reveal em, .reveal img, .reveal ins, .reveal kbd, .reveal q, .reveal s, .reveal samp,
+.reveal small, .reveal strike, .reveal strong, .reveal sub, .reveal sup, .reveal tt, .reveal var,
+.reveal b, .reveal u, .reveal center,
+.reveal dl, .reveal dt, .reveal dd, .reveal ol, .reveal ul, .reveal li,
+.reveal fieldset, .reveal form, .reveal label, .reveal legend,
+.reveal table, .reveal caption, .reveal tbody, .reveal tfoot, .reveal thead, .reveal tr, .reveal th, .reveal td,
+.reveal article, .reveal aside, .reveal canvas, .reveal details, .reveal embed,
+.reveal figure, .reveal figcaption, .reveal footer, .reveal header, .reveal hgroup,
+.reveal menu, .reveal nav, .reveal output, .reveal ruby, .reveal section, .reveal summary,
+.reveal time, .reveal mark, .reveal audio, .reveal video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+.reveal article, .reveal aside, .reveal details, .reveal figcaption, .reveal figure,
+.reveal footer, .reveal header, .reveal hgroup, .reveal menu, .reveal nav, .reveal section {
+  display: block; }
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+body {
+  position: relative;
+  line-height: 1;
+  background-color: #fff;
+  color: #000; }
+
+/*********************************************
+ * VIEW FRAGMENTS
+ *********************************************/
+.reveal .slides section .fragment {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all .2s ease;
+          transition: all .2s ease; }
+  .reveal .slides section .fragment.visible {
+    opacity: 1;
+    visibility: inherit; }
+
+.reveal .slides section .fragment.grow {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.grow.visible {
+    -webkit-transform: scale(1.3);
+            transform: scale(1.3); }
+
+.reveal .slides section .fragment.shrink {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.shrink.visible {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7); }
+
+.reveal .slides section .fragment.zoom-in {
+  -webkit-transform: scale(0.1);
+          transform: scale(0.1); }
+  .reveal .slides section .fragment.zoom-in.visible {
+    -webkit-transform: none;
+            transform: none; }
+
+.reveal .slides section .fragment.fade-out {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.fade-out.visible {
+    opacity: 0;
+    visibility: hidden; }
+
+.reveal .slides section .fragment.semi-fade-out {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.semi-fade-out.visible {
+    opacity: 0.5;
+    visibility: inherit; }
+
+.reveal .slides section .fragment.strike {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.strike.visible {
+    text-decoration: line-through; }
+
+.reveal .slides section .fragment.fade-up {
+  -webkit-transform: translate(0, 20%);
+          transform: translate(0, 20%); }
+  .reveal .slides section .fragment.fade-up.visible {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+.reveal .slides section .fragment.fade-down {
+  -webkit-transform: translate(0, -20%);
+          transform: translate(0, -20%); }
+  .reveal .slides section .fragment.fade-down.visible {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+.reveal .slides section .fragment.fade-right {
+  -webkit-transform: translate(-20%, 0);
+          transform: translate(-20%, 0); }
+  .reveal .slides section .fragment.fade-right.visible {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+.reveal .slides section .fragment.fade-left {
+  -webkit-transform: translate(20%, 0);
+          transform: translate(20%, 0); }
+  .reveal .slides section .fragment.fade-left.visible {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+.reveal .slides section .fragment.current-visible {
+  opacity: 0;
+  visibility: hidden; }
+  .reveal .slides section .fragment.current-visible.current-fragment {
+    opacity: 1;
+    visibility: inherit; }
+
+.reveal .slides section .fragment.highlight-red,
+.reveal .slides section .fragment.highlight-current-red,
+.reveal .slides section .fragment.highlight-green,
+.reveal .slides section .fragment.highlight-current-green,
+.reveal .slides section .fragment.highlight-blue,
+.reveal .slides section .fragment.highlight-current-blue {
+  opacity: 1;
+  visibility: inherit; }
+
+.reveal .slides section .fragment.highlight-red.visible {
+  color: #ff2c2d; }
+
+.reveal .slides section .fragment.highlight-green.visible {
+  color: #17ff2e; }
+
+.reveal .slides section .fragment.highlight-blue.visible {
+  color: #1b91ff; }
+
+.reveal .slides section .fragment.highlight-current-red.current-fragment {
+  color: #ff2c2d; }
+
+.reveal .slides section .fragment.highlight-current-green.current-fragment {
+  color: #17ff2e; }
+
+.reveal .slides section .fragment.highlight-current-blue.current-fragment {
+  color: #1b91ff; }
+
+/*********************************************
+ * DEFAULT ELEMENT STYLES
+ *********************************************/
+/* Fixes issue in Chrome where italic fonts did not appear when printing to PDF */
+.reveal:after {
+  content: '';
+  font-style: italic; }
+
+.reveal iframe {
+  z-index: 1; }
+
+/** Prevents layering issues in certain browser/transition combinations */
+.reveal a {
+  position: relative; }
+
+.reveal .stretch {
+  max-width: none;
+  max-height: none; }
+
+.reveal pre.stretch code {
+  height: 100%;
+  max-height: 100%;
+  box-sizing: border-box; }
+
+/*********************************************
+ * CONTROLS
+ *********************************************/
+.reveal .controls {
+  display: none;
+  position: fixed;
+  width: 110px;
+  height: 110px;
+  z-index: 30;
+  right: 10px;
+  bottom: 10px;
+  -webkit-user-select: none; }
+
+.reveal .controls button {
+  padding: 0;
+  position: absolute;
+  opacity: 0.05;
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  border: 12px solid transparent;
+  -webkit-transform: scale(0.9999);
+          transform: scale(0.9999);
+  -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent; }
+
+.reveal .controls .enabled {
+  opacity: 0.7;
+  cursor: pointer; }
+
+.reveal .controls .enabled:active {
+  margin-top: 1px; }
+
+.reveal .controls .navigate-left {
+  top: 42px;
+  border-right-width: 22px;
+  border-right-color: #000; }
+
+.reveal .controls .navigate-left.fragmented {
+  opacity: 0.3; }
+
+.reveal .controls .navigate-right {
+  left: 74px;
+  top: 42px;
+  border-left-width: 22px;
+  border-left-color: #000; }
+
+.reveal .controls .navigate-right.fragmented {
+  opacity: 0.3; }
+
+.reveal .controls .navigate-up {
+  left: 42px;
+  border-bottom-width: 22px;
+  border-bottom-color: #000; }
+
+.reveal .controls .navigate-up.fragmented {
+  opacity: 0.3; }
+
+.reveal .controls .navigate-down {
+  left: 42px;
+  top: 74px;
+  border-top-width: 22px;
+  border-top-color: #000; }
+
+.reveal .controls .navigate-down.fragmented {
+  opacity: 0.3; }
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+  position: fixed;
+  display: none;
+  height: 3px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.2); }
+
+.reveal .progress:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 20px;
+  width: 100%;
+  top: -20px; }
+
+.reveal .progress span {
+  display: block;
+  height: 100%;
+  width: 0px;
+  background-color: #000;
+  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+          transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+/*********************************************
+ * SLIDE NUMBER
+ *********************************************/
+.reveal .slide-number {
+  position: fixed;
+  display: block;
+  right: 8px;
+  bottom: 8px;
+  z-index: 31;
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 5px; }
+
+.reveal .slide-number-delimiter {
+  margin: 0 3px; }
+
+/*********************************************
+ * SLIDES
+ *********************************************/
+.reveal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -ms-touch-action: none;
+      touch-action: none; }
+
+.reveal .slides {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  overflow: visible;
+  z-index: 1;
+  text-align: center;
+  -webkit-perspective: 600px;
+          perspective: 600px;
+  -webkit-perspective-origin: 50% 40%;
+          perspective-origin: 50% 40%; }
+
+.reveal .slides > section {
+  -ms-perspective: 600px; }
+
+.reveal .slides > section,
+.reveal .slides > section > section {
+  display: none;
+  position: absolute;
+  width: 100%;
+  padding: 20px 0px;
+  z-index: 10;
+  -webkit-transform-style: flat;
+          transform-style: flat;
+  -webkit-transition: -webkit-transform-origin 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), -webkit-transform 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), visibility 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), opacity 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+          transition: transform-origin 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), transform 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), visibility 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), opacity 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+/* Global transition speed settings */
+.reveal[data-transition-speed="fast"] .slides section {
+  -webkit-transition-duration: 400ms;
+          transition-duration: 400ms; }
+
+.reveal[data-transition-speed="slow"] .slides section {
+  -webkit-transition-duration: 1200ms;
+          transition-duration: 1200ms; }
+
+/* Slide-specific transition speed overrides */
+.reveal .slides section[data-transition-speed="fast"] {
+  -webkit-transition-duration: 400ms;
+          transition-duration: 400ms; }
+
+.reveal .slides section[data-transition-speed="slow"] {
+  -webkit-transition-duration: 1200ms;
+          transition-duration: 1200ms; }
+
+.reveal .slides > section.stack {
+  padding-top: 0;
+  padding-bottom: 0; }
+
+.reveal .slides > section.present,
+.reveal .slides > section > section.present {
+  display: block;
+  z-index: 11;
+  opacity: 1; }
+
+.reveal.center,
+.reveal.center .slides,
+.reveal.center .slides section {
+  min-height: 0 !important; }
+
+/* Don't allow interaction with invisible slides */
+.reveal .slides > section.future,
+.reveal .slides > section > section.future,
+.reveal .slides > section.past,
+.reveal .slides > section > section.past {
+  pointer-events: none; }
+
+.reveal.overview .slides > section,
+.reveal.overview .slides > section > section {
+  pointer-events: auto; }
+
+.reveal .slides > section.past,
+.reveal .slides > section.future,
+.reveal .slides > section > section.past,
+.reveal .slides > section > section.future {
+  opacity: 0; }
+
+/*********************************************
+ * Mixins for readability of transitions
+ *********************************************/
+/*********************************************
+ * SLIDE TRANSITION
+ * Aliased 'linear' for backwards compatibility
+ *********************************************/
+.reveal.slide section {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
+
+.reveal .slides > section[data-transition=slide].past,
+.reveal .slides > section[data-transition~=slide-out].past,
+.reveal.slide .slides > section:not([data-transition]).past {
+  -webkit-transform: translate(-150%, 0);
+          transform: translate(-150%, 0); }
+
+.reveal .slides > section[data-transition=slide].future,
+.reveal .slides > section[data-transition~=slide-in].future,
+.reveal.slide .slides > section:not([data-transition]).future {
+  -webkit-transform: translate(150%, 0);
+          transform: translate(150%, 0); }
+
+.reveal .slides > section > section[data-transition=slide].past,
+.reveal .slides > section > section[data-transition~=slide-out].past,
+.reveal.slide .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate(0, -150%);
+          transform: translate(0, -150%); }
+
+.reveal .slides > section > section[data-transition=slide].future,
+.reveal .slides > section > section[data-transition~=slide-in].future,
+.reveal.slide .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate(0, 150%);
+          transform: translate(0, 150%); }
+
+.reveal.linear section {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
+
+.reveal .slides > section[data-transition=linear].past,
+.reveal .slides > section[data-transition~=linear-out].past,
+.reveal.linear .slides > section:not([data-transition]).past {
+  -webkit-transform: translate(-150%, 0);
+          transform: translate(-150%, 0); }
+
+.reveal .slides > section[data-transition=linear].future,
+.reveal .slides > section[data-transition~=linear-in].future,
+.reveal.linear .slides > section:not([data-transition]).future {
+  -webkit-transform: translate(150%, 0);
+          transform: translate(150%, 0); }
+
+.reveal .slides > section > section[data-transition=linear].past,
+.reveal .slides > section > section[data-transition~=linear-out].past,
+.reveal.linear .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate(0, -150%);
+          transform: translate(0, -150%); }
+
+.reveal .slides > section > section[data-transition=linear].future,
+.reveal .slides > section > section[data-transition~=linear-in].future,
+.reveal.linear .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate(0, 150%);
+          transform: translate(0, 150%); }
+
+/*********************************************
+ * CONVEX TRANSITION
+ * Aliased 'default' for backwards compatibility
+ *********************************************/
+.reveal .slides section[data-transition=default].stack,
+.reveal.default .slides section.stack {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d; }
+
+.reveal .slides > section[data-transition=default].past,
+.reveal .slides > section[data-transition~=default-out].past,
+.reveal.default .slides > section:not([data-transition]).past {
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0); }
+
+.reveal .slides > section[data-transition=default].future,
+.reveal .slides > section[data-transition~=default-in].future,
+.reveal.default .slides > section:not([data-transition]).future {
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0); }
+
+.reveal .slides > section > section[data-transition=default].past,
+.reveal .slides > section > section[data-transition~=default-out].past,
+.reveal.default .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0);
+          transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0); }
+
+.reveal .slides > section > section[data-transition=default].future,
+.reveal .slides > section > section[data-transition~=default-in].future,
+.reveal.default .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0);
+          transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0); }
+
+.reveal .slides section[data-transition=convex].stack,
+.reveal.convex .slides section.stack {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d; }
+
+.reveal .slides > section[data-transition=convex].past,
+.reveal .slides > section[data-transition~=convex-out].past,
+.reveal.convex .slides > section:not([data-transition]).past {
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0); }
+
+.reveal .slides > section[data-transition=convex].future,
+.reveal .slides > section[data-transition~=convex-in].future,
+.reveal.convex .slides > section:not([data-transition]).future {
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0); }
+
+.reveal .slides > section > section[data-transition=convex].past,
+.reveal .slides > section > section[data-transition~=convex-out].past,
+.reveal.convex .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0);
+          transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0); }
+
+.reveal .slides > section > section[data-transition=convex].future,
+.reveal .slides > section > section[data-transition~=convex-in].future,
+.reveal.convex .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0);
+          transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0); }
+
+/*********************************************
+ * CONCAVE TRANSITION
+ *********************************************/
+.reveal .slides section[data-transition=concave].stack,
+.reveal.concave .slides section.stack {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d; }
+
+.reveal .slides > section[data-transition=concave].past,
+.reveal .slides > section[data-transition~=concave-out].past,
+.reveal.concave .slides > section:not([data-transition]).past {
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0); }
+
+.reveal .slides > section[data-transition=concave].future,
+.reveal .slides > section[data-transition~=concave-in].future,
+.reveal.concave .slides > section:not([data-transition]).future {
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0); }
+
+.reveal .slides > section > section[data-transition=concave].past,
+.reveal .slides > section > section[data-transition~=concave-out].past,
+.reveal.concave .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate3d(0, -80%, 0) rotateX(-70deg) translate3d(0, -80%, 0);
+          transform: translate3d(0, -80%, 0) rotateX(-70deg) translate3d(0, -80%, 0); }
+
+.reveal .slides > section > section[data-transition=concave].future,
+.reveal .slides > section > section[data-transition~=concave-in].future,
+.reveal.concave .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate3d(0, 80%, 0) rotateX(70deg) translate3d(0, 80%, 0);
+          transform: translate3d(0, 80%, 0) rotateX(70deg) translate3d(0, 80%, 0); }
+
+/*********************************************
+ * ZOOM TRANSITION
+ *********************************************/
+.reveal .slides section[data-transition=zoom],
+.reveal.zoom .slides section:not([data-transition]) {
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease; }
+
+.reveal .slides > section[data-transition=zoom].past,
+.reveal .slides > section[data-transition~=zoom-out].past,
+.reveal.zoom .slides > section:not([data-transition]).past {
+  visibility: hidden;
+  -webkit-transform: scale(16);
+          transform: scale(16); }
+
+.reveal .slides > section[data-transition=zoom].future,
+.reveal .slides > section[data-transition~=zoom-in].future,
+.reveal.zoom .slides > section:not([data-transition]).future {
+  visibility: hidden;
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2); }
+
+.reveal .slides > section > section[data-transition=zoom].past,
+.reveal .slides > section > section[data-transition~=zoom-out].past,
+.reveal.zoom .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate(0, -150%);
+          transform: translate(0, -150%); }
+
+.reveal .slides > section > section[data-transition=zoom].future,
+.reveal .slides > section > section[data-transition~=zoom-in].future,
+.reveal.zoom .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate(0, 150%);
+          transform: translate(0, 150%); }
+
+/*********************************************
+ * CUBE TRANSITION
+ *********************************************/
+.reveal.cube .slides {
+  -webkit-perspective: 1300px;
+          perspective: 1300px; }
+
+.reveal.cube .slides section {
+  padding: 30px;
+  min-height: 700px;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  box-sizing: border-box;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d; }
+
+.reveal.center.cube .slides section {
+  min-height: 0; }
+
+.reveal.cube .slides section:not(.stack):before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  -webkit-transform: translateZ(-20px);
+          transform: translateZ(-20px); }
+
+.reveal.cube .slides section:not(.stack):after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 90%;
+  height: 30px;
+  left: 5%;
+  bottom: 0;
+  background: none;
+  z-index: 1;
+  border-radius: 4px;
+  box-shadow: 0px 95px 25px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translateZ(-90px) rotateX(65deg);
+          transform: translateZ(-90px) rotateX(65deg); }
+
+.reveal.cube .slides > section.stack {
+  padding: 0;
+  background: none; }
+
+.reveal.cube .slides > section.past {
+  -webkit-transform-origin: 100% 0%;
+          transform-origin: 100% 0%;
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg);
+          transform: translate3d(-100%, 0, 0) rotateY(-90deg); }
+
+.reveal.cube .slides > section.future {
+  -webkit-transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg);
+          transform: translate3d(100%, 0, 0) rotateY(90deg); }
+
+.reveal.cube .slides > section > section.past {
+  -webkit-transform-origin: 0% 100%;
+          transform-origin: 0% 100%;
+  -webkit-transform: translate3d(0, -100%, 0) rotateX(90deg);
+          transform: translate3d(0, -100%, 0) rotateX(90deg); }
+
+.reveal.cube .slides > section > section.future {
+  -webkit-transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
+  -webkit-transform: translate3d(0, 100%, 0) rotateX(-90deg);
+          transform: translate3d(0, 100%, 0) rotateX(-90deg); }
+
+/*********************************************
+ * PAGE TRANSITION
+ *********************************************/
+.reveal.page .slides {
+  -webkit-perspective-origin: 0% 50%;
+          perspective-origin: 0% 50%;
+  -webkit-perspective: 3000px;
+          perspective: 3000px; }
+
+.reveal.page .slides section {
+  padding: 30px;
+  min-height: 700px;
+  box-sizing: border-box;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d; }
+
+.reveal.page .slides section.past {
+  z-index: 12; }
+
+.reveal.page .slides section:not(.stack):before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.1);
+  -webkit-transform: translateZ(-20px);
+          transform: translateZ(-20px); }
+
+.reveal.page .slides section:not(.stack):after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 90%;
+  height: 30px;
+  left: 5%;
+  bottom: 0;
+  background: none;
+  z-index: 1;
+  border-radius: 4px;
+  box-shadow: 0px 95px 25px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translateZ(-90px) rotateX(65deg); }
+
+.reveal.page .slides > section.stack {
+  padding: 0;
+  background: none; }
+
+.reveal.page .slides > section.past {
+  -webkit-transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
+  -webkit-transform: translate3d(-40%, 0, 0) rotateY(-80deg);
+          transform: translate3d(-40%, 0, 0) rotateY(-80deg); }
+
+.reveal.page .slides > section.future {
+  -webkit-transform-origin: 100% 0%;
+          transform-origin: 100% 0%;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0); }
+
+.reveal.page .slides > section > section.past {
+  -webkit-transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
+  -webkit-transform: translate3d(0, -40%, 0) rotateX(80deg);
+          transform: translate3d(0, -40%, 0) rotateX(80deg); }
+
+.reveal.page .slides > section > section.future {
+  -webkit-transform-origin: 0% 100%;
+          transform-origin: 0% 100%;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0); }
+
+/*********************************************
+ * FADE TRANSITION
+ *********************************************/
+.reveal .slides section[data-transition=fade],
+.reveal.fade .slides section:not([data-transition]),
+.reveal.fade .slides > section > section:not([data-transition]) {
+  -webkit-transform: none;
+          transform: none;
+  -webkit-transition: opacity 0.5s;
+          transition: opacity 0.5s; }
+
+.reveal.fade.overview .slides section,
+.reveal.fade.overview .slides > section > section {
+  -webkit-transition: none;
+          transition: none; }
+
+/*********************************************
+ * NO TRANSITION
+ *********************************************/
+.reveal .slides section[data-transition=none],
+.reveal.none .slides section:not([data-transition]) {
+  -webkit-transform: none;
+          transform: none;
+  -webkit-transition: none;
+          transition: none; }
+
+/*********************************************
+ * PAUSED MODE
+ *********************************************/
+.reveal .pause-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 100;
+  -webkit-transition: all 1s ease;
+          transition: all 1s ease; }
+
+.reveal.paused .pause-overlay {
+  visibility: visible;
+  opacity: 1; }
+
+/*********************************************
+ * FALLBACK
+ *********************************************/
+.no-transforms {
+  overflow-y: auto; }
+
+.no-transforms .reveal .slides {
+  position: relative;
+  width: 80%;
+  height: auto !important;
+  top: 0;
+  left: 50%;
+  margin: 0;
+  text-align: center; }
+
+.no-transforms .reveal .controls,
+.no-transforms .reveal .progress {
+  display: none !important; }
+
+.no-transforms .reveal .slides section {
+  display: block !important;
+  opacity: 1 !important;
+  position: relative !important;
+  height: auto;
+  min-height: 0;
+  top: 0;
+  left: -50%;
+  margin: 70px 0;
+  -webkit-transform: none;
+          transform: none; }
+
+.no-transforms .reveal .slides section section {
+  left: 0; }
+
+.reveal .no-transition,
+.reveal .no-transition * {
+  -webkit-transition: none !important;
+          transition: none !important; }
+
+/*********************************************
+ * PER-SLIDE BACKGROUNDS
+ *********************************************/
+.reveal .backgrounds {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -webkit-perspective: 600px;
+          perspective: 600px; }
+
+.reveal .slide-background {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  background-color: transparent;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-transition: all 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+          transition: all 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+.reveal .slide-background.stack {
+  display: block; }
+
+.reveal .slide-background.present {
+  opacity: 1;
+  visibility: visible; }
+
+.print-pdf .reveal .slide-background {
+  opacity: 1 !important;
+  visibility: visible !important; }
+
+/* Video backgrounds */
+.reveal .slide-background video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  top: 0;
+  left: 0; }
+
+/* Immediate transition style */
+.reveal[data-background-transition=none] > .backgrounds .slide-background,
+.reveal > .backgrounds .slide-background[data-background-transition=none] {
+  -webkit-transition: none;
+          transition: none; }
+
+/* Slide */
+.reveal[data-background-transition=slide] > .backgrounds .slide-background,
+.reveal > .backgrounds .slide-background[data-background-transition=slide] {
+  opacity: 1;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
+
+.reveal[data-background-transition=slide] > .backgrounds .slide-background.past,
+.reveal > .backgrounds .slide-background.past[data-background-transition=slide] {
+  -webkit-transform: translate(-100%, 0);
+          transform: translate(-100%, 0); }
+
+.reveal[data-background-transition=slide] > .backgrounds .slide-background.future,
+.reveal > .backgrounds .slide-background.future[data-background-transition=slide] {
+  -webkit-transform: translate(100%, 0);
+          transform: translate(100%, 0); }
+
+.reveal[data-background-transition=slide] > .backgrounds .slide-background > .slide-background.past,
+.reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=slide] {
+  -webkit-transform: translate(0, -100%);
+          transform: translate(0, -100%); }
+
+.reveal[data-background-transition=slide] > .backgrounds .slide-background > .slide-background.future,
+.reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=slide] {
+  -webkit-transform: translate(0, 100%);
+          transform: translate(0, 100%); }
+
+/* Convex */
+.reveal[data-background-transition=convex] > .backgrounds .slide-background.past,
+.reveal > .backgrounds .slide-background.past[data-background-transition=convex] {
+  opacity: 0;
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0); }
+
+.reveal[data-background-transition=convex] > .backgrounds .slide-background.future,
+.reveal > .backgrounds .slide-background.future[data-background-transition=convex] {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0); }
+
+.reveal[data-background-transition=convex] > .backgrounds .slide-background > .slide-background.past,
+.reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=convex] {
+  opacity: 0;
+  -webkit-transform: translate3d(0, -100%, 0) rotateX(90deg) translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0) rotateX(90deg) translate3d(0, -100%, 0); }
+
+.reveal[data-background-transition=convex] > .backgrounds .slide-background > .slide-background.future,
+.reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=convex] {
+  opacity: 0;
+  -webkit-transform: translate3d(0, 100%, 0) rotateX(-90deg) translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0) rotateX(-90deg) translate3d(0, 100%, 0); }
+
+/* Concave */
+.reveal[data-background-transition=concave] > .backgrounds .slide-background.past,
+.reveal > .backgrounds .slide-background.past[data-background-transition=concave] {
+  opacity: 0;
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0); }
+
+.reveal[data-background-transition=concave] > .backgrounds .slide-background.future,
+.reveal > .backgrounds .slide-background.future[data-background-transition=concave] {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0); }
+
+.reveal[data-background-transition=concave] > .backgrounds .slide-background > .slide-background.past,
+.reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=concave] {
+  opacity: 0;
+  -webkit-transform: translate3d(0, -100%, 0) rotateX(-90deg) translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0) rotateX(-90deg) translate3d(0, -100%, 0); }
+
+.reveal[data-background-transition=concave] > .backgrounds .slide-background > .slide-background.future,
+.reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=concave] {
+  opacity: 0;
+  -webkit-transform: translate3d(0, 100%, 0) rotateX(90deg) translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0) rotateX(90deg) translate3d(0, 100%, 0); }
+
+/* Zoom */
+.reveal[data-background-transition=zoom] > .backgrounds .slide-background,
+.reveal > .backgrounds .slide-background[data-background-transition=zoom] {
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease; }
+
+.reveal[data-background-transition=zoom] > .backgrounds .slide-background.past,
+.reveal > .backgrounds .slide-background.past[data-background-transition=zoom] {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(16);
+          transform: scale(16); }
+
+.reveal[data-background-transition=zoom] > .backgrounds .slide-background.future,
+.reveal > .backgrounds .slide-background.future[data-background-transition=zoom] {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2); }
+
+.reveal[data-background-transition=zoom] > .backgrounds .slide-background > .slide-background.past,
+.reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=zoom] {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(16);
+          transform: scale(16); }
+
+.reveal[data-background-transition=zoom] > .backgrounds .slide-background > .slide-background.future,
+.reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=zoom] {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2); }
+
+/* Global transition speed settings */
+.reveal[data-transition-speed="fast"] > .backgrounds .slide-background {
+  -webkit-transition-duration: 400ms;
+          transition-duration: 400ms; }
+
+.reveal[data-transition-speed="slow"] > .backgrounds .slide-background {
+  -webkit-transition-duration: 1200ms;
+          transition-duration: 1200ms; }
+
+/*********************************************
+ * OVERVIEW
+ *********************************************/
+.reveal.overview {
+  -webkit-perspective-origin: 50% 50%;
+          perspective-origin: 50% 50%;
+  -webkit-perspective: 700px;
+          perspective: 700px; }
+  .reveal.overview .slides {
+    -moz-transform-style: preserve-3d; }
+  .reveal.overview .slides section {
+    height: 100%;
+    top: 0 !important;
+    opacity: 1 !important;
+    overflow: hidden;
+    visibility: visible !important;
+    cursor: pointer;
+    box-sizing: border-box; }
+  .reveal.overview .slides section:hover,
+  .reveal.overview .slides section.present {
+    outline: 10px solid rgba(150, 150, 150, 0.4);
+    outline-offset: 10px; }
+  .reveal.overview .slides section .fragment {
+    opacity: 1;
+    -webkit-transition: none;
+            transition: none; }
+  .reveal.overview .slides section:after,
+  .reveal.overview .slides section:before {
+    display: none !important; }
+  .reveal.overview .slides > section.stack {
+    padding: 0;
+    top: 0 !important;
+    background: none;
+    outline: none;
+    overflow: visible; }
+  .reveal.overview .backgrounds {
+    -webkit-perspective: inherit;
+            perspective: inherit;
+    -moz-transform-style: preserve-3d; }
+  .reveal.overview .backgrounds .slide-background {
+    opacity: 1;
+    visibility: visible;
+    outline: 10px solid rgba(150, 150, 150, 0.1);
+    outline-offset: 10px; }
+
+.reveal.overview .slides section,
+.reveal.overview-deactivating .slides section {
+  -webkit-transition: none;
+          transition: none; }
+
+.reveal.overview .backgrounds .slide-background,
+.reveal.overview-deactivating .backgrounds .slide-background {
+  -webkit-transition: none;
+          transition: none; }
+
+.reveal.overview-animated .slides {
+  -webkit-transition: -webkit-transform 0.4s ease;
+          transition: transform 0.4s ease; }
+
+/*********************************************
+ * RTL SUPPORT
+ *********************************************/
+.reveal.rtl .slides,
+.reveal.rtl .slides h1,
+.reveal.rtl .slides h2,
+.reveal.rtl .slides h3,
+.reveal.rtl .slides h4,
+.reveal.rtl .slides h5,
+.reveal.rtl .slides h6 {
+  direction: rtl;
+  font-family: sans-serif; }
+
+.reveal.rtl pre,
+.reveal.rtl code {
+  direction: ltr; }
+
+.reveal.rtl ol,
+.reveal.rtl ul {
+  text-align: right; }
+
+.reveal.rtl .progress span {
+  float: right; }
+
+/*********************************************
+ * PARALLAX BACKGROUND
+ *********************************************/
+.reveal.has-parallax-background .backgrounds {
+  -webkit-transition: all 0.8s ease;
+          transition: all 0.8s ease; }
+
+/* Global transition speed settings */
+.reveal.has-parallax-background[data-transition-speed="fast"] .backgrounds {
+  -webkit-transition-duration: 400ms;
+          transition-duration: 400ms; }
+
+.reveal.has-parallax-background[data-transition-speed="slow"] .backgrounds {
+  -webkit-transition-duration: 1200ms;
+          transition-duration: 1200ms; }
+
+/*********************************************
+ * LINK PREVIEW OVERLAY
+ *********************************************/
+.reveal .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease; }
+
+.reveal .overlay.visible {
+  opacity: 1;
+  visibility: visible; }
+
+.reveal .overlay .spinner {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  z-index: 10;
+  background-image: url(data:image/gif;base64,R0lGODlhIAAgAPMAAJmZmf%2F%2F%2F6%2Bvr8nJybW1tcDAwOjo6Nvb26ioqKOjo7Ozs%2FLy8vz8%2FAAAAAAAAAAAACH%2FC05FVFNDQVBFMi4wAwEAAAAh%2FhpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh%2BQQJCgAAACwAAAAAIAAgAAAE5xDISWlhperN52JLhSSdRgwVo1ICQZRUsiwHpTJT4iowNS8vyW2icCF6k8HMMBkCEDskxTBDAZwuAkkqIfxIQyhBQBFvAQSDITM5VDW6XNE4KagNh6Bgwe60smQUB3d4Rz1ZBApnFASDd0hihh12BkE9kjAJVlycXIg7CQIFA6SlnJ87paqbSKiKoqusnbMdmDC2tXQlkUhziYtyWTxIfy6BE8WJt5YJvpJivxNaGmLHT0VnOgSYf0dZXS7APdpB309RnHOG5gDqXGLDaC457D1zZ%2FV%2FnmOM82XiHRLYKhKP1oZmADdEAAAh%2BQQJCgAAACwAAAAAIAAgAAAE6hDISWlZpOrNp1lGNRSdRpDUolIGw5RUYhhHukqFu8DsrEyqnWThGvAmhVlteBvojpTDDBUEIFwMFBRAmBkSgOrBFZogCASwBDEY%2FCZSg7GSE0gSCjQBMVG023xWBhklAnoEdhQEfyNqMIcKjhRsjEdnezB%2BA4k8gTwJhFuiW4dokXiloUepBAp5qaKpp6%2BHo7aWW54wl7obvEe0kRuoplCGepwSx2jJvqHEmGt6whJpGpfJCHmOoNHKaHx61WiSR92E4lbFoq%2BB6QDtuetcaBPnW6%2BO7wDHpIiK9SaVK5GgV543tzjgGcghAgAh%2BQQJCgAAACwAAAAAIAAgAAAE7hDISSkxpOrN5zFHNWRdhSiVoVLHspRUMoyUakyEe8PTPCATW9A14E0UvuAKMNAZKYUZCiBMuBakSQKG8G2FzUWox2AUtAQFcBKlVQoLgQReZhQlCIJesQXI5B0CBnUMOxMCenoCfTCEWBsJColTMANldx15BGs8B5wlCZ9Po6OJkwmRpnqkqnuSrayqfKmqpLajoiW5HJq7FL1Gr2mMMcKUMIiJgIemy7xZtJsTmsM4xHiKv5KMCXqfyUCJEonXPN2rAOIAmsfB3uPoAK%2B%2BG%2Bw48edZPK%2BM6hLJpQg484enXIdQFSS1u6UhksENEQAAIfkECQoAAAAsAAAAACAAIAAABOcQyEmpGKLqzWcZRVUQnZYg1aBSh2GUVEIQ2aQOE%2BG%2BcD4ntpWkZQj1JIiZIogDFFyHI0UxQwFugMSOFIPJftfVAEoZLBbcLEFhlQiqGp1Vd140AUklUN3eCA51C1EWMzMCezCBBmkxVIVHBWd3HHl9JQOIJSdSnJ0TDKChCwUJjoWMPaGqDKannasMo6WnM562R5YluZRwur0wpgqZE7NKUm%2BFNRPIhjBJxKZteWuIBMN4zRMIVIhffcgojwCF117i4nlLnY5ztRLsnOk%2BaV%2BoJY7V7m76PdkS4trKcdg0Zc0tTcKkRAAAIfkECQoAAAAsAAAAACAAIAAABO4QyEkpKqjqzScpRaVkXZWQEximw1BSCUEIlDohrft6cpKCk5xid5MNJTaAIkekKGQkWyKHkvhKsR7ARmitkAYDYRIbUQRQjWBwJRzChi9CRlBcY1UN4g0%2FVNB0AlcvcAYHRyZPdEQFYV8ccwR5HWxEJ02YmRMLnJ1xCYp0Y5idpQuhopmmC2KgojKasUQDk5BNAwwMOh2RtRq5uQuPZKGIJQIGwAwGf6I0JXMpC8C7kXWDBINFMxS4DKMAWVWAGYsAdNqW5uaRxkSKJOZKaU3tPOBZ4DuK2LATgJhkPJMgTwKCdFjyPHEnKxFCDhEAACH5BAkKAAAALAAAAAAgACAAAATzEMhJaVKp6s2nIkolIJ2WkBShpkVRWqqQrhLSEu9MZJKK9y1ZrqYK9WiClmvoUaF8gIQSNeF1Er4MNFn4SRSDARWroAIETg1iVwuHjYB1kYc1mwruwXKC9gmsJXliGxc%2BXiUCby9ydh1sOSdMkpMTBpaXBzsfhoc5l58Gm5yToAaZhaOUqjkDgCWNHAULCwOLaTmzswadEqggQwgHuQsHIoZCHQMMQgQGubVEcxOPFAcMDAYUA85eWARmfSRQCdcMe0zeP1AAygwLlJtPNAAL19DARdPzBOWSm1brJBi45soRAWQAAkrQIykShQ9wVhHCwCQCACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiRMDjI0Fd30%2FiI2UA5GSS5UDj2l6NoqgOgN4gksEBgYFf0FDqKgHnyZ9OX8HrgYHdHpcHQULXAS2qKpENRg7eAMLC7kTBaixUYFkKAzWAAnLC7FLVxLWDBLKCwaKTULgEwbLA4hJtOkSBNqITT3xEgfLpBtzE%2FjiuL04RGEBgwWhShRgQExHBAAh%2BQQJCgAAACwAAAAAIAAgAAAE7xDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfZiCqGk5dTESJeaOAlClzsJsqwiJwiqnFrb2nS9kmIcgEsjQydLiIlHehhpejaIjzh9eomSjZR%2BipslWIRLAgMDOR2DOqKogTB9pCUJBagDBXR6XB0EBkIIsaRsGGMMAxoDBgYHTKJiUYEGDAzHC9EACcUGkIgFzgwZ0QsSBcXHiQvOwgDdEwfFs0sDzt4S6BK4xYjkDOzn0unFeBzOBijIm1Dgmg5YFQwsCMjp1oJ8LyIAACH5BAkKAAAALAAAAAAgACAAAATwEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GGl6NoiPOH16iZKNlH6KmyWFOggHhEEvAwwMA0N9GBsEC6amhnVcEwavDAazGwIDaH1ipaYLBUTCGgQDA8NdHz0FpqgTBwsLqAbWAAnIA4FWKdMLGdYGEgraigbT0OITBcg5QwPT4xLrROZL6AuQAPUS7bxLpoWidY0JtxLHKhwwMJBTHgPKdEQAACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GAULDJCRiXo1CpGXDJOUjY%2BYip9DhToJA4RBLwMLCwVDfRgbBAaqqoZ1XBMHswsHtxtFaH1iqaoGNgAIxRpbFAgfPQSqpbgGBqUD1wBXeCYp1AYZ19JJOYgH1KwA4UBvQwXUBxPqVD9L3sbp2BNk2xvvFPJd%2BMFCN6HAAIKgNggY0KtEBAAh%2BQQJCgAAACwAAAAAIAAgAAAE6BDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfYIDMaAFdTESJeaEDAIMxYFqrOUaNW4E4ObYcCXaiBVEgULe0NJaxxtYksjh2NLkZISgDgJhHthkpU4mW6blRiYmZOlh4JWkDqILwUGBnE6TYEbCgevr0N1gH4At7gHiRpFaLNrrq8HNgAJA70AWxQIH1%2BvsYMDAzZQPC9VCNkDWUhGkuE5PxJNwiUK4UfLzOlD4WvzAHaoG9nxPi5d%2BjYUqfAhhykOFwJWiAAAIfkECQoAAAAsAAAAACAAIAAABPAQyElpUqnqzaciSoVkXVUMFaFSwlpOCcMYlErAavhOMnNLNo8KsZsMZItJEIDIFSkLGQoQTNhIsFehRww2CQLKF0tYGKYSg%2BygsZIuNqJksKgbfgIGepNo2cIUB3V1B3IvNiBYNQaDSTtfhhx0CwVPI0UJe0%2Bbm4g5VgcGoqOcnjmjqDSdnhgEoamcsZuXO1aWQy8KAwOAuTYYGwi7w5h%2BKr0SJ8MFihpNbx%2B4Erq7BYBuzsdiH1jCAzoSfl0rVirNbRXlBBlLX%2BBP0XJLAPGzTkAuAOqb0WT5AH7OcdCm5B8TgRwSRKIHQtaLCwg1RAAAOwAAAAAAAAAAAA%3D%3D);
+  visibility: visible;
+  opacity: 0.6;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease; }
+
+.reveal .overlay header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 40px;
+  z-index: 2;
+  border-bottom: 1px solid #222; }
+
+.reveal .overlay header a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 36px;
+  padding: 0 10px;
+  float: right;
+  opacity: 0.6;
+  box-sizing: border-box; }
+
+.reveal .overlay header a:hover {
+  opacity: 1; }
+
+.reveal .overlay header a .icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-position: 50% 50%;
+  background-size: 100%;
+  background-repeat: no-repeat; }
+
+.reveal .overlay header a.close .icon {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABkklEQVRYR8WX4VHDMAxG6wnoJrABZQPYBCaBTWAD2g1gE5gg6OOsXuxIlr40d81dfrSJ9V4c2VLK7spHuTJ/5wpM07QXuXc5X0opX2tEJcadjHuV80li/FgxTIEK/5QBCICBD6xEhSMGHgQPgBgLiYVAB1dpSqKDawxTohFw4JSEA3clzgIBPCURwE2JucBR7rhPJJv5OpJwDX+SfDjgx1wACQeJG1aChP9K/IMmdZ8DtESV1WyP3Bt4MwM6sj4NMxMYiqUWHQu4KYA/SYkIjOsm3BXYWMKFDwU2khjCQ4ELJUJ4SmClRArOCmSXGuKma0fYD5CbzHxFpCSGAhfAVSSUGDUk2BWZaff2g6GE15BsBQ9nwmpIGDiyHQddwNTMKkbZaf9fajXQca1EX44puJZUsnY0ObGmITE3GVLCbEhQUjGVt146j6oasWN+49Vph2w1pZ5EansNZqKBm1txbU57iRRcZ86RWMDdWtBJUHBHwoQPi1GV+JCbntmvok7iTX4/Up9mgyTc/FJYDTcndgH/AA5A/CHsyEkVAAAAAElFTkSuQmCC); }
+
+.reveal .overlay header a.external .icon {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcElEQVRYR+2WSQoAIQwEzf8f7XiOMkUQxUPlGkM3hVmiQfQR9GYnH1SsAQlI4DiBqkCMoNb9y2e90IAEJPAcgdznU9+engMaeJ7Azh5Y1U67gAho4DqBqmB1buAf0MB1AlVBek83ZPkmJMGc1wAR+AAqod/B97TRpQAAAABJRU5ErkJggg==); }
+
+.reveal .overlay .viewport {
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  top: 40px;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+.reveal .overlay.overlay-preview .viewport iframe {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border: 0;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease; }
+
+.reveal .overlay.overlay-preview.loaded .viewport iframe {
+  opacity: 1;
+  visibility: visible; }
+
+.reveal .overlay.overlay-preview.loaded .viewport-inner {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 45%;
+  width: 100%;
+  text-align: center;
+  letter-spacing: normal; }
+
+.reveal .overlay.overlay-preview .x-frame-error {
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease 0.3s;
+          transition: opacity 0.3s ease 0.3s; }
+
+.reveal .overlay.overlay-preview.loaded .x-frame-error {
+  opacity: 1; }
+
+.reveal .overlay.overlay-preview.loaded .spinner {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2); }
+
+.reveal .overlay.overlay-help .viewport {
+  overflow: auto;
+  color: #fff; }
+
+.reveal .overlay.overlay-help .viewport .viewport-inner {
+  width: 600px;
+  margin: auto;
+  padding: 20px 20px 80px 20px;
+  text-align: center;
+  letter-spacing: normal; }
+
+.reveal .overlay.overlay-help .viewport .viewport-inner .title {
+  font-size: 20px; }
+
+.reveal .overlay.overlay-help .viewport .viewport-inner table {
+  border: 1px solid #fff;
+  border-collapse: collapse;
+  font-size: 16px; }
+
+.reveal .overlay.overlay-help .viewport .viewport-inner table th,
+.reveal .overlay.overlay-help .viewport .viewport-inner table td {
+  width: 200px;
+  padding: 14px;
+  border: 1px solid #fff;
+  vertical-align: middle; }
+
+.reveal .overlay.overlay-help .viewport .viewport-inner table th {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+/*********************************************
+ * PLAYBACK COMPONENT
+ *********************************************/
+.reveal .playback {
+  position: fixed;
+  left: 15px;
+  bottom: 20px;
+  z-index: 30;
+  cursor: pointer;
+  -webkit-transition: all 400ms ease;
+          transition: all 400ms ease; }
+
+.reveal.overview .playback {
+  opacity: 0;
+  visibility: hidden; }
+
+/*********************************************
+ * ROLLING LINKS
+ *********************************************/
+.reveal .roll {
+  display: inline-block;
+  line-height: 1.2;
+  overflow: hidden;
+  vertical-align: top;
+  -webkit-perspective: 400px;
+          perspective: 400px;
+  -webkit-perspective-origin: 50% 50%;
+          perspective-origin: 50% 50%; }
+
+.reveal .roll:hover {
+  background: none;
+  text-shadow: none; }
+
+.reveal .roll span {
+  display: block;
+  position: relative;
+  padding: 0 2px;
+  pointer-events: none;
+  -webkit-transition: all 400ms ease;
+          transition: all 400ms ease;
+  -webkit-transform-origin: 50% 0%;
+          transform-origin: 50% 0%;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
+
+.reveal .roll:hover span {
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-transform: translate3d(0px, 0px, -45px) rotateX(90deg);
+          transform: translate3d(0px, 0px, -45px) rotateX(90deg); }
+
+.reveal .roll span:after {
+  content: attr(data-title);
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0 2px;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform-origin: 50% 0%;
+          transform-origin: 50% 0%;
+  -webkit-transform: translate3d(0px, 110%, 0px) rotateX(-90deg);
+          transform: translate3d(0px, 110%, 0px) rotateX(-90deg); }
+
+/*********************************************
+ * SPEAKER NOTES
+ *********************************************/
+.reveal aside.notes {
+  display: none; }
+
+.reveal .speaker-notes {
+  display: none;
+  position: absolute;
+  width: 70%;
+  max-height: 15%;
+  left: 15%;
+  bottom: 26px;
+  padding: 10px;
+  z-index: 1;
+  font-size: 18px;
+  line-height: 1.4;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+  box-sizing: border-box;
+  text-align: left;
+  font-family: Helvetica, sans-serif;
+  -webkit-overflow-scrolling: touch; }
+
+.reveal .speaker-notes.visible:not(:empty) {
+  display: block; }
+
+@media screen and (max-width: 1024px) {
+  .reveal .speaker-notes {
+    font-size: 14px; } }
+
+@media screen and (max-width: 600px) {
+  .reveal .speaker-notes {
+    width: 90%;
+    left: 5%; } }
+
+/*********************************************
+ * ZOOM PLUGIN
+ *********************************************/
+.zoomed .reveal *,
+.zoomed .reveal *:before,
+.zoomed .reveal *:after {
+  -webkit-backface-visibility: visible !important;
+          backface-visibility: visible !important; }
+
+.zoomed .reveal .progress,
+.zoomed .reveal .controls {
+  opacity: 0; }
+
+.zoomed .reveal .roll span {
+  background: none; }
+
+.zoomed .reveal .roll span:after {
+  visibility: hidden; }
+
+
+
+</style>
+
+    <style>
+    .markdown-preview-enhanced pre.editor-colors.editor-colors,
+.markdown-preview-enhanced code {
+  background-color: #f7f7f7 !important;
+}
+pre.editor-colors {
+  background-color: #fff;
+  color: #333;
+}
+pre.editor-colors .line.cursor-line {
+  background-color: #f5f5f5;
+}
+pre.editor-colors .invisible {
+  color: #c0c0c0;
+}
+pre.editor-colors .cursor {
+  border-left: 2px solid #000;
+}
+pre.editor-colors .selection .region {
+  background-color: #c8c8fa;
+}
+pre.editor-colors .bracket-matcher .region {
+  border-bottom: 1px solid #000;
+  box-sizing: border-box;
+}
+pre.editor-colors .invisible-character {
+  color: #c0c0c0;
+}
+pre.editor-colors .indent-guide {
+  color: #c0c0c0;
+}
+pre.editor-colors .wrap-guide {
+  background-color: #c0c0c0;
+}
+pre.editor-colors .gutter {
+  background-color: #fff;
+  color: #333;
+}
+pre.editor-colors .gutter .line-number {
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+}
+pre.editor-colors .gutter .line-number.cursor-line {
+  color: #333;
+  background-color: #f5f5f5;
+}
+pre.editor-colors .gutter .line-number.cursor-line-no-selection {
+  background-color: transparent;
+}
+pre.editor-colors .gutter .line-number .icon-right {
+  color: #333;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed.git-line-removed::before {
+  bottom: -3px;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 25px;
+  border-bottom: 1px dotted rgba(255, 236, 236, 0.5);
+  pointer-events: none;
+}
+pre.editor-colors .gutter .line-number.folded,
+pre.editor-colors .gutter .line-number:after,
+pre.editor-colors .fold-marker:after {
+  color: #333;
+}
+pre.editor-colors .search-results .mpe-syntax--marker .region {
+  background-color: transparent;
+  border: 1px solid #ed6a43;
+}
+pre.editor-colors .search-results .mpe-syntax--marker.current-result .region {
+  border: 1px solid #fff;
+}
+.mpe-syntax--comment,
+.mpe-syntax--punctuation.mpe-syntax--definition.mpe-syntax--comment,
+.mpe-syntax--string.mpe-syntax--comment {
+  color: #969896;
+}
+.mpe-syntax--constant,
+.mpe-syntax--entity.mpe-syntax--name.mpe-syntax--constant,
+.mpe-syntax--variable.mpe-syntax--other.mpe-syntax--constant,
+.mpe-syntax--variable.mpe-syntax--language {
+  color: #0086b3;
+}
+.mpe-syntax--entity,
+.mpe-syntax--entity.mpe-syntax--name {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #795da3;
+}
+.mpe-syntax--variable.mpe-syntax--parameter.mpe-syntax--function {
+  color: #333;
+}
+.mpe-syntax--entity.mpe-syntax--name.mpe-syntax--tag {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #63a35c;
+}
+.mpe-syntax--keyword {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #a71d5d;
+}
+.mpe-syntax--storage,
+.mpe-syntax--storage.mpe-syntax--type {
+  color: #a71d5d;
+}
+.mpe-syntax--storage.mpe-syntax--modifier.mpe-syntax--package,
+.mpe-syntax--storage.mpe-syntax--modifier.mpe-syntax--import,
+.mpe-syntax--storage.mpe-syntax--type.mpe-syntax--java {
+  color: #333;
+}
+.mpe-syntax--string,
+.mpe-syntax--punctuation.mpe-syntax--definition.mpe-syntax--string,
+.mpe-syntax--string .mpe-syntax--punctuation.mpe-syntax--section.mpe-syntax--embedded .mpe-syntax--source {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #183691;
+}
+.mpe-syntax--support {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #0086b3;
+}
+.mpe-syntax--meta.mpe-syntax--property-name {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #0086b3;
+}
+.mpe-syntax--variable {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #ed6a43;
+}
+.mpe-syntax--variable.mpe-syntax--other {
+  color: #333;
+}
+.mpe-syntax--invalid.mpe-syntax--broken {
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+  color: #b52a1d;
+}
+.mpe-syntax--invalid.mpe-syntax--deprecated {
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+  color: #b52a1d;
+}
+.mpe-syntax--invalid.mpe-syntax--illegal {
+  font-style: italic;
+  text-decoration: underline;
+  background-color: #b52a1d;
+  color: #f8f8f8;
+}
+.mpe-syntax--carriage-return {
+  font-style: italic;
+  text-decoration: underline;
+  background-color: #b52a1d;
+  color: #f8f8f8;
+  undefined: ^M;
+}
+.mpe-syntax--invalid.mpe-syntax--unimplemented {
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+  color: #b52a1d;
+}
+.mpe-syntax--message.mpe-syntax--error {
+  color: #b52a1d;
+}
+.mpe-syntax--string .mpe-syntax--source {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #333;
+}
+.mpe-syntax--string .mpe-syntax--variable {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #0086b3;
+}
+.mpe-syntax--source.mpe-syntax--regexp,
+.mpe-syntax--string.mpe-syntax--regexp {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #183691;
+}
+.mpe-syntax--string.mpe-syntax--regexp.mpe-syntax--character-class,
+.mpe-syntax--string.mpe-syntax--regexp .mpe-syntax--constant.mpe-syntax--character.mpe-syntax--escape,
+.mpe-syntax--string.mpe-syntax--regexp .mpe-syntax--source.mpe-syntax--ruby.mpe-syntax--embedded,
+.mpe-syntax--string.mpe-syntax--regexp .mpe-syntax--string.mpe-syntax--regexp.mpe-syntax--arbitrary-repitition {
+  color: #183691;
+}
+.mpe-syntax--string.mpe-syntax--regexp .mpe-syntax--constant.mpe-syntax--character.mpe-syntax--escape {
+  font-weight: bold;
+  color: #63a35c;
+}
+.mpe-syntax--support.mpe-syntax--constant {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #0086b3;
+}
+.mpe-syntax--support.mpe-syntax--variable {
+  color: #0086b3;
+}
+.mpe-syntax--meta.mpe-syntax--module-reference {
+  color: #0086b3;
+}
+.mpe-syntax--markup.mpe-syntax--list {
+  color: #693a17;
+}
+.mpe-syntax--markup.mpe-syntax--heading,
+.mpe-syntax--markup.mpe-syntax--heading .mpe-syntax--entity.mpe-syntax--name {
+  font-weight: bold;
+  color: #1d3e81;
+}
+.mpe-syntax--markup.mpe-syntax--quote {
+  color: #008080;
+}
+.mpe-syntax--markup.mpe-syntax--italic {
+  font-style: italic;
+  color: #333;
+}
+.mpe-syntax--markup.mpe-syntax--bold {
+  font-weight: bold;
+  color: #333;
+}
+.mpe-syntax--markup.mpe-syntax--raw {
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #0086b3;
+}
+.mpe-syntax--markup.mpe-syntax--deleted,
+.mpe-syntax--meta.mpe-syntax--diff.mpe-syntax--header.mpe-syntax--from-file,
+.mpe-syntax--punctuation.mpe-syntax--definition.mpe-syntax--deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+.mpe-syntax--markup.mpe-syntax--inserted,
+.mpe-syntax--meta.mpe-syntax--diff.mpe-syntax--header.mpe-syntax--to-file,
+.mpe-syntax--punctuation.mpe-syntax--definition.mpe-syntax--inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+.mpe-syntax--markup.mpe-syntax--changed,
+.mpe-syntax--punctuation.mpe-syntax--definition.mpe-syntax--changed {
+  background-color: #ffe3b4;
+  color: #ef9700;
+}
+.mpe-syntax--markup.mpe-syntax--ignored,
+.mpe-syntax--markup.mpe-syntax--untracked {
+  color: #d8d8d8;
+  background-color: #808080;
+}
+.mpe-syntax--meta.mpe-syntax--diff.mpe-syntax--range {
+  color: #795da3;
+  font-weight: bold;
+}
+.mpe-syntax--meta.mpe-syntax--diff.mpe-syntax--header {
+  color: #0086b3;
+}
+.mpe-syntax--meta.mpe-syntax--separator {
+  font-weight: bold;
+  color: #1d3e81;
+}
+.mpe-syntax--meta.mpe-syntax--output {
+  color: #1d3e81;
+}
+.mpe-syntax--brackethighlighter.mpe-syntax--tag,
+.mpe-syntax--brackethighlighter.mpe-syntax--curly,
+.mpe-syntax--brackethighlighter.mpe-syntax--round,
+.mpe-syntax--brackethighlighter.mpe-syntax--square,
+.mpe-syntax--brackethighlighter.mpe-syntax--angle,
+.mpe-syntax--brackethighlighter.mpe-syntax--quote {
+  color: #595e62;
+}
+.mpe-syntax--brackethighlighter.mpe-syntax--unmatched {
+  color: #b52a1d;
+}
+.mpe-syntax--sublimelinter.mpe-syntax--mark.mpe-syntax--error {
+  color: #b52a1d;
+}
+.mpe-syntax--sublimelinter.mpe-syntax--mark.mpe-syntax--warning {
+  color: #ed6a43;
+}
+.mpe-syntax--sublimelinter.mpe-syntax--gutter-mark {
+  color: #c0c0c0;
+}
+.mpe-syntax--constant.mpe-syntax--other.mpe-syntax--reference.mpe-syntax--link,
+.mpe-syntax--string.mpe-syntax--other.mpe-syntax--link {
+  color: #183691;
+  text-decoration: underline;
+}
+.markdown-preview-enhanced {
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  overflow: initial;
+  margin: 10px 13px 10px 13px;
+  padding: 2em;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+.markdown-preview-enhanced > :first-child {
+  margin-top: 0;
+}
+.markdown-preview-enhanced[is="space-pen-div"] {
+  width: 100%;
+  margin: 0;
+  z-index: 999;
+  overflow: scroll;
+  font-size: 16px;
+  display: block;
+  position: absolute;
+}
+.markdown-preview-enhanced h1,
+.markdown-preview-enhanced h2,
+.markdown-preview-enhanced h3,
+.markdown-preview-enhanced h4,
+.markdown-preview-enhanced h5,
+.markdown-preview-enhanced h6 {
+  line-height: 1.2;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  color: #000000;
+}
+.markdown-preview-enhanced h1 {
+  font-size: 2.25em;
+  font-weight: 300;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #d6d6d6;
+}
+.markdown-preview-enhanced h2 {
+  font-size: 1.75em;
+  font-weight: 400;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #d6d6d6;
+}
+.markdown-preview-enhanced h3 {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+.markdown-preview-enhanced h4 {
+  font-size: 1.25em;
+  font-weight: 600;
+}
+.markdown-preview-enhanced h5 {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+.markdown-preview-enhanced h6 {
+  font-size: 1.0em;
+  font-weight: 600;
+}
+.markdown-preview-enhanced h1,
+.markdown-preview-enhanced h2,
+.markdown-preview-enhanced h3,
+.markdown-preview-enhanced h4,
+.markdown-preview-enhanced h5 {
+  font-weight: 600;
+}
+.markdown-preview-enhanced h5 {
+  font-size: 1em;
+}
+.markdown-preview-enhanced h6 {
+  color: #5c5c5c;
+}
+.markdown-preview-enhanced h1,
+.markdown-preview-enhanced h2 {
+  border-bottom: 1px solid #d6d6d6;
+}
+.markdown-preview-enhanced strong {
+  color: #000000;
+}
+.markdown-preview-enhanced del {
+  color: #5c5c5c;
+}
+.markdown-preview-enhanced a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+.markdown-preview-enhanced a {
+  color: #08c;
+  text-decoration: none;
+}
+.markdown-preview-enhanced a:hover {
+  color: #0050a3;
+  text-decoration: none;
+}
+.markdown-preview-enhanced img,
+.markdown-preview-enhanced svg {
+  max-width: 100%;
+}
+.markdown-preview-enhanced > p {
+  margin-top: 0;
+  margin-bottom: 16px;
+  word-wrap: break-word;
+}
+.markdown-preview-enhanced > ul,
+.markdown-preview-enhanced > ol {
+  margin-bottom: 16px;
+}
+.markdown-preview-enhanced ul,
+.markdown-preview-enhanced ol {
+  padding-left: 2em;
+}
+.markdown-preview-enhanced ul.no-list,
+.markdown-preview-enhanced ol.no-list {
+  padding: 0;
+  list-style-type: none;
+}
+.markdown-preview-enhanced ul ul,
+.markdown-preview-enhanced ul ol,
+.markdown-preview-enhanced ol ol,
+.markdown-preview-enhanced ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.markdown-preview-enhanced li {
+  margin-bottom: 0;
+}
+.markdown-preview-enhanced li.task-list-item {
+  list-style: none;
+}
+.markdown-preview-enhanced li > p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.markdown-preview-enhanced .task-list-item-checkbox {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+}
+.markdown-preview-enhanced .task-list-item-checkbox:hover {
+  cursor: pointer;
+}
+.markdown-preview-enhanced blockquote {
+  margin: 16px 0;
+  font-size: inherit;
+  padding: 0 15px;
+  color: #5c5c5c;
+  border-left: 4px solid #d6d6d6;
+}
+.markdown-preview-enhanced blockquote > :first-child {
+  margin-top: 0;
+}
+.markdown-preview-enhanced blockquote > :last-child {
+  margin-bottom: 0;
+}
+.markdown-preview-enhanced hr {
+  height: 4px;
+  margin: 32px 0;
+  background-color: #d6d6d6;
+  border: 0 none;
+}
+.markdown-preview-enhanced table {
+  margin: 10px 0 15px 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+.markdown-preview-enhanced table th {
+  font-weight: bold;
+  color: #000000;
+}
+.markdown-preview-enhanced table td,
+.markdown-preview-enhanced table th {
+  border: 1px solid #d6d6d6;
+  padding: 6px 13px;
+}
+.markdown-preview-enhanced dl {
+  padding: 0;
+}
+.markdown-preview-enhanced dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+.markdown-preview-enhanced dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+.markdown-preview-enhanced code {
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 0.85em !important;
+  color: #000000;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  padding: 0.2em 0;
+}
+.markdown-preview-enhanced code::before,
+.markdown-preview-enhanced code::after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+.markdown-preview-enhanced pre > code {
+  padding: 0;
+  margin: 0;
+  font-size: 0.85em !important;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+.markdown-preview-enhanced .highlight {
+  margin-bottom: 16px;
+}
+.markdown-preview-enhanced .highlight pre,
+.markdown-preview-enhanced pre {
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+  padding: 16px;
+  overflow: auto;
+  font-size: 0.85em !important;
+  line-height: 1.45;
+  color: #333;
+  background-color: #f0f0f0 !important;
+  border: #d6d6d6;
+  border-radius: 3px;
+}
+.markdown-preview-enhanced .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+.markdown-preview-enhanced pre {
+  word-wrap: break-word;
+  white-space: normal;
+  word-break: break-all;
+}
+.markdown-preview-enhanced pre .section {
+  opacity: 1;
+}
+.markdown-preview-enhanced pre code,
+.markdown-preview-enhanced pre tt {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+.markdown-preview-enhanced pre code:before,
+.markdown-preview-enhanced pre tt:before,
+.markdown-preview-enhanced pre code:after,
+.markdown-preview-enhanced pre tt:after {
+  content: normal;
+}
+.markdown-preview-enhanced p,
+.markdown-preview-enhanced blockquote,
+.markdown-preview-enhanced ul,
+.markdown-preview-enhanced ol,
+.markdown-preview-enhanced dl,
+.markdown-preview-enhanced pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.markdown-preview-enhanced kbd {
+  color: #000000;
+  border: 1px solid #d6d6d6;
+  border-bottom: 2px solid #c7c7c7;
+  padding: 2px 4px;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+}
+.markdown-preview-enhanced .pagebreak,
+.markdown-preview-enhanced .newpage {
+  page-break-before: always;
+}
+@media screen and (min-width: 914px) {
+  .markdown-preview-enhanced {
+    width: 980px;
+    margin: 10px auto;
+    background: #fff;
+  }
+}
+@media screen and (max-width: 400px) {
+  .markdown-preview-enhanced {
+    font-size: 14px;
+    margin: 0 auto;
+    padding: 15px;
+  }
+}
+@media print {
+  .markdown-preview-enhanced {
+    background-color: #fff;
+    /*table,*/
+  }
+  .markdown-preview-enhanced h1,
+  .markdown-preview-enhanced h2,
+  .markdown-preview-enhanced h3,
+  .markdown-preview-enhanced h4,
+  .markdown-preview-enhanced h5,
+  .markdown-preview-enhanced h6 {
+    color: #000000;
+    page-break-after: avoid;
+  }
+  .markdown-preview-enhanced blockquote {
+    color: #5c5c5c;
+  }
+  .markdown-preview-enhanced pre {
+    page-break-inside: avoid;
+  }
+  .markdown-preview-enhanced table {
+    display: table;
+  }
+  .markdown-preview-enhanced img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .markdown-preview-enhanced pre,
+  .markdown-preview-enhanced code {
+    word-wrap: break-word;
+    white-space: normal;
+  }
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk {
+  position: relative;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .output-div {
+  overflow-x: auto;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .output-div svg {
+  display: block;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk pre {
+  cursor: text;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .btn-group {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .btn-group .run-btn,
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .btn-group .run-all-btn {
+  float: right;
+  margin-left: 4px;
+  border-radius: 3px;
+  font-size: 0.8em;
+  color: #eee;
+  background-color: #528bff;
+  background-image: none;
+  border: none;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .btn-group .run-btn:hover,
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .btn-group .run-all-btn:hover {
+  background-color: #4b7fe8;
+  cursor: pointer;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk:hover .btn-group {
+  display: block;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk .status {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 0.85em;
+  color: inherit;
+  padding: 2px 6px;
+  background-color: rgba(0, 0, 0, 0.04);
+  display: none;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk.running .btn-group {
+  display: none;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .code-chunk.running .status {
+  display: block;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .back-to-top-btn,
+.markdown-preview-enhanced[is="space-pen-div"] .refresh-btn {
+  position: fixed;
+  display: none;
+  right: 24px;
+  top: 54px;
+}
+.markdown-preview-enhanced[is="space-pen-div"] .back-to-top-btn {
+  right: 72px;
+}
+.markdown-preview-enhanced[is="space-pen-div"]:hover .back-to-top-btn,
+.markdown-preview-enhanced[is="space-pen-div"]:hover .refresh-btn {
+  display: block;
+  opacity: 0.4;
+}
+.markdown-preview-enhanced[is="space-pen-div"]:hover .back-to-top-btn:hover,
+.markdown-preview-enhanced[is="space-pen-div"]:hover .refresh-btn:hover {
+  opacity: 1.0;
+}
+.markdown-preview-enhanced:not([is="space-pen-div"]) .code-chunk .btn-group {
+  display: none;
+}
+.markdown-preview-enhanced:not([is="space-pen-div"]) .code-chunk .status {
+  display: none;
+}
+.markdown-preview-enhanced:not([is="space-pen-div"]) .back-to-top-btn {
+  display: none;
+}
+/*
+ * Reveal.js styles
+ */
+[data-presentation-preview-mode] {
+  background-color: #f4f4f4;
+}
+[data-presentation-preview-mode] .preview-slides {
+  width: 100%;
+}
+[data-presentation-preview-mode] .preview-slides .slide {
+  position: relative;
+  background-color: #fff !important;
+  padding: 2em !important;
+  margin-bottom: 12px;
+  text-align: left !important;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0px 0px 16px 4px #eeeeee;
+  font-size: 24px;
+}
+[data-presentation-preview-mode] .preview-slides .slide h1,
+[data-presentation-preview-mode] .preview-slides .slide h2,
+[data-presentation-preview-mode] .preview-slides .slide h3,
+[data-presentation-preview-mode] .preview-slides .slide h4,
+[data-presentation-preview-mode] .preview-slides .slide h5,
+[data-presentation-preview-mode] .preview-slides .slide h6 {
+  margin-top: 0;
+}
+[data-presentation-preview-mode] .preview-slides .slide .background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+[data-presentation-preview-mode] .preview-slides .slide .background-iframe,
+[data-presentation-preview-mode] .preview-slides .slide .background-iframe-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border: none;
+  z-index: 1;
+}
+[data-presentation-preview-mode] .preview-slides .slide .background-iframe-overlay {
+  z-index: 2;
+}
+[data-presentation-preview-mode] section {
+  display: block;
+  width: 100%;
+  transform-style: preserve-3d;
+  font-size: 100%;
+  font: inherit;
+  z-index: 100;
+}
+.markdown-preview-enhanced[data-presentation-mode] {
+  font-size: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.markdown-preview-enhanced[data-presentation-mode] h1,
+.markdown-preview-enhanced[data-presentation-mode] h2,
+.markdown-preview-enhanced[data-presentation-mode] h3,
+.markdown-preview-enhanced[data-presentation-mode] h4,
+.markdown-preview-enhanced[data-presentation-mode] h5,
+.markdown-preview-enhanced[data-presentation-mode] h6 {
+  margin-top: 0;
+}
+.markdown-preview-enhanced[data-presentation-mode] strong {
+  font-weight: bold;
+}
+.markdown-preview-enhanced[data-presentation-mode]::-webkit-scrollbar {
+  display: none;
+}
+.markdown-preview-enhanced .slides {
+  text-align: left !important;
+}
+
+    /*
+ * Your Stylesheet
+ *
+ * This stylesheet is loaded when Atom starts up and is reloaded automatically
+ * when it is changed.
+ *
+ * If you are unfamiliar with LESS, you can read more about it here:
+ * http://www.lesscss.org
+ */
+/*
+ * markdown-preview-enhanced custom style
+ */
+.markdown-preview-enhanced.markdown-preview-enhanced h1,
+.markdown-preview-enhanced.markdown-preview-enhanced h2 {
+  border: none;
+}
+.markdown-preview-enhanced.markdown-preview-enhanced.phantomjs-pdf {
+  font-size: 0.8em;
+}
+
+    </style>
+
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ messageStyle: 'none', tex2jax: {inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]], processEnvironments: false, processEscapes: true} }); </script> <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/lib/js/head.min.js'></script> <script src='https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/js/reveal.min.js'></script>
+  </head>
+  <body class="markdown-preview-enhanced  " data-presentation-mode>
+
+  <div class="reveal">
+  <div class="slides">
+    <section><section ><h1 id="qubitjs">qubit.js</h1>
+<p>A very <strike>silly</strike> simple quantum computing circuit simulator.<br>
+(the implementation could be wrong though)<br>
+By Yiyi Wang</p>
+</section><section ><h2 id="example">Example</h2>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--storage mpe-syntax--type mpe-syntax--const mpe-syntax--js"><span>const</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--curly mpe-syntax--js"><span>{</span></span><span class="mpe-syntax--constant mpe-syntax--other mpe-syntax--js"><span>QuantumComputing</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--curly mpe-syntax--js"><span>}</span></span><span>&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--function-call mpe-syntax--js"><span class="mpe-syntax--support mpe-syntax--function mpe-syntax--js"><span>require</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--string mpe-syntax--quoted mpe-syntax--single mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--string mpe-syntax--begin mpe-syntax--js"><span>&#39;</span></span><span>qubit.js</span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--string mpe-syntax--end mpe-syntax--js"><span>&#39;</span></span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--storage mpe-syntax--type mpe-syntax--const mpe-syntax--js"><span>const</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--other mpe-syntax--js"><span>qc</span></span><span>&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--function-call mpe-syntax--js"><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>QuantumComputing</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>qc</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>boot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>3</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span>&nbsp;&nbsp;&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;simulate&nbsp;3&nbsp;qubits</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--property mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--support mpe-syntax--variable mpe-syntax--property mpe-syntax--dom mpe-syntax--js"><span>x</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>)</span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;apply&nbsp;Pauli&nbsp;X&nbsp;Gate&nbsp;(Not&nbsp;Gate)&nbsp;to&nbsp;qubit[0]</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>measure</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span>&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;measure&nbsp;all</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--type mpe-syntax--object mpe-syntax--console mpe-syntax--js"><span>console</span></span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--support mpe-syntax--function mpe-syntax--console mpe-syntax--js"><span>log</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--variable mpe-syntax--other mpe-syntax--object mpe-syntax--js"><span>qc</span></span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>toQASM</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;convert&nbsp;to&nbsp;QASM&nbsp;code&nbsp;&nbsp;</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--type mpe-syntax--object mpe-syntax--console mpe-syntax--js"><span>console</span></span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--support mpe-syntax--function mpe-syntax--console mpe-syntax--js"><span>log</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--variable mpe-syntax--other mpe-syntax--object mpe-syntax--js"><span>qc</span></span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>getResult</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span>&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;print&nbsp;probabilities&nbsp;&nbsp;</span></span></span></div></pre>
+</section><section ><p><img src="http://i.imgur.com/AIEBx3T.png"></p>
+</section><section ><h1 id="3-qubtis">3 Qubtis</h1>
+<p>8 possible quantum states</p>
+<table>
+<thead>
+<tr><th>q[2]q[1]q[0]</th><th>000</th><th>001</th><th>010</th><th>011</th><th>100</th><th>101</th><th>110</th><th>111</th></tr>
+</thead>
+<tbody>
+<tr><td>amplitude</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+</section><section ><h1 id="3-qubtis-1">3 Qubtis</h1>
+<p>8 possible quantum states</p>
+<table>
+<thead>
+<tr><th>q[2]q[1]q[0]</th><th>000</th><th>001</th><th>010</th><th>011</th><th>100</th><th>101</th><th>110</th><th>111</th></tr>
+</thead>
+<tbody>
+<tr><td>amplitude</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>qc</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>boot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>3</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;=&gt;</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div></pre>
+</section><section ><h1 id="pauli-x-gate-not-gate">Pauli X Gate (Not Gate)</h1>
+<p>It is a $unary\ quantum\ gate$  <br>
+matrix:
+$$X = \begin{bmatrix}  0 &amp; 1 \\  1 &amp; 0\end{bmatrix}$$</p>
+</section><section ><table>
+<thead>
+<tr><th>q[2]q[1]q[0]</th><th>000</th><th>001</th><th>010</th><th>011</th><th>100</th><th>101</th><th>110</th><th>111</th></tr>
+</thead>
+<tbody>
+<tr><td>amplitude</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>qc</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>boot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>2</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--property mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--support mpe-syntax--variable mpe-syntax--property mpe-syntax--dom mpe-syntax--js"><span>x</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;=&gt;</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;what&nbsp;should&nbsp;the&nbsp;amplitudes&nbsp;be&nbsp;?</span></span></span></div></pre>
+</section><section ><p>We are applying the matrix to a single qubit <strong>q[0]</strong>...</p>
+<table>
+<thead>
+<tr><th>q[2]q[1]q[0]</th><th>000</th><th>001</th><th>010</th><th>011</th><th>100</th><th>101</th><th>110</th><th>111</th></tr>
+</thead>
+<tbody>
+<tr><td>amplitude</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+<p>So we found all possible pairs.</p>
+<p>$\alpha|0\rangle + \beta|1\rangle$</p>
+<ul>
+<li><p>$|00\color{red}{0}\rangle$ and $|00\color{red}{1}\rangle$</p></li>
+<li><p>$|01\color{red}{0}\rangle$ and $|01\color{red}{1}\rangle$</p></li>
+<li><p>$|10\color{red}{0}\rangle$ and $|10\color{red}{1}\rangle$</p></li>
+<li><p>$|11\color{red}{0}\rangle$ and $|11\color{red}{1}\rangle$</p></li>
+</ul>
+</section><section ><table>
+<thead>
+<tr><th>q[2]q[1]q[0]</th><th>000</th><th>001</th><th>010</th><th>011</th><th>100</th><th>101</th><th>110</th><th>111</th></tr>
+</thead>
+<tbody>
+<tr><td>amplitude</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+<p>For the pair:</p>
+<ul>
+<li><p>$|00\color{red}{0}\rangle$ and $|00\color{red}{1}\rangle$  <br>
+We have amplitudes $\alpha = 1$ and $\beta = 0$   <br>
+Therefore
+$$\begin{bmatrix}\alpha&#x27; \\ \beta&#x27; \end{bmatrix}= X\begin{bmatrix}\alpha \\\beta\end{bmatrix}= \begin{bmatrix}0 &amp; 1 \\1 &amp; 0\end{bmatrix}\begin{bmatrix} 1 \\ 0 \end{bmatrix} =\begin{bmatrix} 0 \\ 1 \end{bmatrix}$$</p></li>
+</ul>
+</section><section ><table>
+<thead>
+<tr><th>q[2]q[1]q[0]</th><th>000</th><th>001</th><th>010</th><th>011</th><th>100</th><th>101</th><th>110</th><th>111</th></tr>
+</thead>
+<tbody>
+<tr><td>amplitude</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>qc</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>boot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>2</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--property mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--support mpe-syntax--variable mpe-syntax--property mpe-syntax--dom mpe-syntax--js"><span>x</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;=&gt;</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div></pre>
+</section><section ><h1 id="measure">Measure</h1>
+<table>
+<thead>
+<tr><th>q[2]q[1]q[0]</th><th>000</th><th>001</th><th>010</th><th>011</th><th>100</th><th>101</th><th>110</th><th>111</th></tr>
+</thead>
+<tbody>
+<tr><td>amplitude</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>qc</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>boot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>2</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--property mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--support mpe-syntax--variable mpe-syntax--property mpe-syntax--dom mpe-syntax--js"><span>x</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>measure</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span>&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;one&nbsp;qubit&nbsp;register&nbsp;to&nbsp;one&nbsp;classic&nbsp;register</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;=&gt;</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div></pre>
+<p>$\because probability\ =\ amplitude ^ 2$  <br>
+$\therefore p(|001\rangle) = 1^2 = 1$</p>
+</section><section ><p><img src="http://i.imgur.com/ZHfLNfY.png" alt="Screen Shot 2017-04-21 at 1.00.40 AM"></p>
+</section><section ><h1 id="another-example">Another example</h1>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>qc</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>boot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>3</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span>&nbsp;&nbsp;&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;simulate&nbsp;3&nbsp;qubits</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--property mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--support mpe-syntax--variable mpe-syntax--property mpe-syntax--dom mpe-syntax--js"><span>x</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>)</span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;apply&nbsp;Pauli&nbsp;X&nbsp;Gate&nbsp;(Not&nbsp;Gate)&nbsp;to&nbsp;qubit[0]</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>cnot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span>&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;apply&nbsp;Controlled&nbsp;Not&nbsp;(CNot&nbsp;Gate)</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>measure</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div></pre>
+</section><section ><h2 id="after-applying-pauli-x-gate-to-q0">After applying Pauli X Gate to q[0]</h2>
+<table>
+<thead>
+<tr><th>q[2]q[1]q[0]</th><th>000</th><th>001</th><th>010</th><th>011</th><th>100</th><th>101</th><th>110</th><th>111</th></tr>
+</thead>
+<tbody>
+<tr><td>amplitude</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>qc</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>boot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>2</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--property mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--support mpe-syntax--variable mpe-syntax--property mpe-syntax--dom mpe-syntax--js"><span>x</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>cnot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span>&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;q[0]&nbsp;is&nbsp;control,&nbsp;q[1]&nbsp;is&nbsp;target</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;=&gt;</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;=&gt;</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;what&nbsp;should&nbsp;the&nbsp;amplitudes&nbsp;be&nbsp;?</span></span></span></div></pre>
+</section><section ><h1 id="recall-the-controlled-gate">Recall the Controlled Gate</h1>
+<h2 id="cnot-gate">(CNot Gate)</h2>
+<p>it is a Binary Quantum Gate that operates on two qubits</p>
+<p>$$CNOT = \begin{bmatrix}1 &amp; 0 &amp; 0 &amp; 0 \\0 &amp; 1 &amp; 0 &amp; 0 \\0 &amp; 0 &amp; 0 &amp; 1 \\0 &amp; 0 &amp; 1 &amp; 0\end{bmatrix}$$  <br>
+transforms the quantum state:<br>
+$a|00\rangle + b|01\rangle + c|10\rangle + d|11\rangle$   <br>
+into:<br>
+$a|00\rangle + b|01\rangle + c|11\rangle + d|10\rangle$</p>
+</section><section ><p>We are applying the matrix to a two qubits (control) <strong>q[0]</strong> and (target) <strong>q[1]</strong>...</p>
+<table>
+<thead>
+<tr><th>q[2]q[1]q[0]</th><th>000</th><th>001</th><th>010</th><th>011</th><th>100</th><th>101</th><th>110</th><th>111</th></tr>
+</thead>
+<tbody>
+<tr><td>amplitude</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+<p>$|control, target \rangle$  <br>
+$a|00\rangle + b|01\rangle + c|10\rangle + d|11\rangle$   <br>
+So we found all possible pairs</p>
+<ul>
+<li><p>$|0\color{red}{00}\rangle$ and $|0\color{red}{01}\rangle$ and $|0\color{red}{10}\rangle$ and $|0\color{red}{11}\rangle$</p></li>
+<li><p>$|1\color{red}{00}\rangle$ and $|1\color{red}{01}\rangle$ and $|1\color{red}{10}\rangle$ and $|1\color{red}{11}\rangle$</p></li>
+</ul>
+</section><section ><p>For the pair:</p>
+<ul>
+<li><p>$|0\color{red}{00}\rangle$ and $|0\color{red}{01}\rangle$ and $|0\color{red}{10}\rangle$ and $|0\color{red}{11}\rangle$  <br>
+$\because |control, target \rangle$ and $q[0]$ is control, $q[1]$ is target.<br>
+$\therefore a|0\color{red}{00}\rangle + b|0\color{red}{10}\rangle + c|0\color{red}{01}\rangle + d|0\color{red}{11}\rangle$</p></li>
+</ul>
+<p>We have $a = 0$, $b = 0$, $c = 1$, $d = 0$
+$$\therefore\begin{bmatrix}a&#x27; \\ b&#x27; \\ c&#x27; \\ d&#x27;\end{bmatrix} = CNOT \begin{bmatrix} a \\ b \\ c \\ d \end{bmatrix} =\begin{bmatrix}1 &amp; 0 &amp; 0 &amp; 0 \\0 &amp; 1 &amp; 0 &amp; 0 \\0 &amp; 0 &amp; 0 &amp; 1 \\0 &amp; 0 &amp; 1 &amp; 0\end{bmatrix}\begin{bmatrix}0\\0\\1\\0\end{bmatrix} =\begin{bmatrix} 0 \\ 0 \\ 0 \\ 1  \end{bmatrix}$$</p>
+</section><section ><table>
+<thead>
+<tr><th>q[2]q[1]q[0]</th><th>000</th><th>001</th><th>010</th><th>011</th><th>100</th><th>101</th><th>110</th><th>111</th></tr>
+</thead>
+<tbody>
+<tr><td>amplitude</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>qc</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>boot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>2</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--property mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--support mpe-syntax--variable mpe-syntax--property mpe-syntax--dom mpe-syntax--js"><span>x</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>cnot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span>&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;q[0]&nbsp;is&nbsp;control,&nbsp;q[1]&nbsp;is&nbsp;target</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;=&gt;</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;=&gt;</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div></pre>
+</section><section ><h1 id="measure-1">Measure</h1>
+<table>
+<thead>
+<tr><th>q[2]q[1]q[0]</th><th>000</th><th>001</th><th>010</th><th>011</th><th>100</th><th>101</th><th>110</th><th>111</th></tr>
+</thead>
+<tbody>
+<tr><td>amplitude</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>qc</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>boot</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>2</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--property mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--support mpe-syntax--variable mpe-syntax--property mpe-syntax--dom mpe-syntax--js"><span>x</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>measure</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span><span>&nbsp;</span><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;one&nbsp;qubit&nbsp;register&nbsp;to&nbsp;one&nbsp;classic&nbsp;register</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;=&gt;</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;=&gt;</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>amplitudes&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span></span></div></pre>
+<p>$\because probability\ =\ amplitude ^ 2$  <br>
+$\therefore p(|011\rangle) = 1^2 = 1$</p>
+</section><section ><p><img src="http://i.imgur.com/mscoSQY.png" alt="Screen Shot 2017-04-21 at 1.39.07 AM"></p>
+</section><section ><p>I implemented two helper functions for applying matrix.</p>
+<ul>
+<li><p><strong>applySingleBitMatrix(offset, matrix)</strong></p></li>
+<li><p><strong>applyTwoBitsMatrix(control, target, matrix)</strong></p></li>
+</ul>
+</section><section ><p>For example, <strong>Hadamard Gate</strong>:<br>
+$$H = \begin{bmatrix} 1/\sqrt{2} &amp; 1/\sqrt{2} \\ 1/\sqrt{2} &amp; -1/\sqrt{2} \end{bmatrix}$$</p>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--variable mpe-syntax--other mpe-syntax--object mpe-syntax--js"><span>qc</span></span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>h</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--comment mpe-syntax--line mpe-syntax--double-slash mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--comment mpe-syntax--js"><span>//</span></span><span>&nbsp;is&nbsp;the&nbsp;same&nbsp;as</span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--storage mpe-syntax--type mpe-syntax--const mpe-syntax--js"><span>const</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--other mpe-syntax--js"><span>t</span></span><span>&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--assignment mpe-syntax--js"><span>=</span></span><span>&nbsp;</span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>1</span></span><span>&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--js"><span>/</span></span><span>&nbsp;</span><span class="mpe-syntax--support mpe-syntax--class mpe-syntax--math mpe-syntax--js"><span>Math</span></span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--support mpe-syntax--function mpe-syntax--math mpe-syntax--js"><span>sqrt</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>2</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span class="mpe-syntax--variable mpe-syntax--other mpe-syntax--object mpe-syntax--js"><span>qc</span></span><span class="mpe-syntax--meta mpe-syntax--method-call mpe-syntax--js"><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--method mpe-syntax--period mpe-syntax--js"><span>.</span></span><span class="mpe-syntax--entity mpe-syntax--name mpe-syntax--function mpe-syntax--js"><span>applySingleBitMatrix</span></span><span class="mpe-syntax--meta mpe-syntax--arguments mpe-syntax--js"><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--begin mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>(</span></span><span class="mpe-syntax--constant mpe-syntax--numeric mpe-syntax--decimal mpe-syntax--js"><span>0</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span><span>[</span></span><span>t</span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;t</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span></span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>[</span></span><span>t</span><span class="mpe-syntax--meta mpe-syntax--delimiter mpe-syntax--object mpe-syntax--comma mpe-syntax--js"><span>,</span></span><span>&nbsp;</span><span class="mpe-syntax--keyword mpe-syntax--operator mpe-syntax--js"><span>-</span></span><span>t</span><span class="mpe-syntax--meta mpe-syntax--brace mpe-syntax--square mpe-syntax--js"><span>]</span><span>]</span></span><span class="mpe-syntax--punctuation mpe-syntax--definition mpe-syntax--arguments mpe-syntax--end mpe-syntax--bracket mpe-syntax--round mpe-syntax--js"><span>)</span></span></span></span></span></div><div class="line"><span class="mpe-syntax--source mpe-syntax--js"><span>&nbsp;</span></span></div></pre>
+</section><section ><p>For more information about this project, check the <strong>qubit.js</strong> github repo:<br>
+<a href="https://github.com/shd101wyy/qubit.js">https://github.com/shd101wyy/qubit.js</a></p>
+</section><section ><h1 id="thank-you">Thank you</h1>
+</section></section>
+  </div>
+</div>
+
+  </body>
+  <script>
+  Reveal.initialize({"margin":0.1,"enableSpeakerNotes":true,"dependencies":[{"src":"revealjs_deps/notes.js","async":true}]})
+</script>
+</html>
