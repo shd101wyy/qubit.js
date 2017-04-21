@@ -1,6 +1,7 @@
 # qubit.js
-A simple quantum computing circuit simulator (working in progress)  
-**Not Finished yet!**
+A simple quantum computing circuit simulator (working in progress)   
+**Not Finished yet!**  
+Check this [presentation](https://rawgit.com/shd101wyy/qubit.js/master/docs/qc.html).
 
 ## Install  
 **node.js**  
@@ -21,7 +22,7 @@ npm install
 
 ## Usages  
 ```javascript  
-const {QuantumComputing} = require('./lib/qubit.js')
+const {QuantumComputing} = require('qubit.js')
 const qc = new QuantumComputing()
 qc
   .boot(1)   // create one qubit register
