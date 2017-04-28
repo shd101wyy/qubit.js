@@ -4,7 +4,7 @@ presentation:
 ---
 
 <!-- slide -->
-# qubit.js
+# [qubit.js](https://github.com/shd101wyy/qubit.js)  
 A very <strike>silly</strike> simple quantum computing circuit simulator.  
 (the implementation could be wrong though)   
 By Yiyi Wang
@@ -162,8 +162,13 @@ qc
   .boot(3)   // simulate 3 qubits
   .x(0)      // apply Pauli X Gate (Not Gate) to qubit[0]
   .cnot(0, 1) // apply Controlled Not (CNot Gate)
+              // q[0] is control, q[1] is target.
   .measure()
 ```
+
+<!-- slide vertical:true -->  
+![Screen Shot 2017-04-28 at 11.52.19 AM](http://i.imgur.com/i5GjhYE.png)
+
 
 <!-- slide vertical:true -->
 ## After applying Pauli X Gate to q[0]
@@ -194,8 +199,8 @@ $$CNOT = \begin{bmatrix}
 0 & 1 & 0 & 0 \\
 0 & 0 & 0 & 1 \\
 0 & 0 & 1 & 0
-\end{bmatrix}$$  
-transforms the quantum state:   
+\end{bmatrix}$$   
+transforms the quantum state: ($|control, target \rangle$)  
 $a|00\rangle + b|01\rangle + c|10\rangle + d|11\rangle$   
 into:  
 $a|00\rangle + b|01\rangle + c|11\rangle + d|10\rangle$   
@@ -278,7 +283,9 @@ $\therefore p(|011\rangle) = 1^2 = 1$
 <!-- slide vertical: true -->
 I implemented two helper functions for applying matrix.  
 * **applySingleBitMatrix(offset, matrix)**
+  * apply unary quantum gate  
 * **applyTwoBitsMatrix(control, target, matrix)**
+  * apply binary quantum gate
 
 <!-- slide vertical: true -->
 For example, **Hadamard Gate**:  
@@ -298,7 +305,10 @@ qc.applySingleBitMatrix(0, [[t, t], [t, -t]])
 
 <!-- slide vertical: true -->
 For more information about this project, check the **qubit.js** github repo:  
-https://github.com/shd101wyy/qubit.js
+https://github.com/shd101wyy/qubit.js  
+
+[IBM Q](https://quantumexperience.ng.bluemix.net)  
+
 
 <!-- slide vertical: true -->
 # Thank you
