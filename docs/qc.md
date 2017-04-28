@@ -18,7 +18,7 @@ By Yiyi Wang
 ```javascript
 const {QuantumComputing} = require('qubit.js')
 
-const qc = QuantumComputing()
+const qc = new QuantumComputing()
 
 qc
   .boot(3)   // simulate 3 qubits
