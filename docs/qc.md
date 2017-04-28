@@ -9,6 +9,10 @@ A very <strike>silly</strike> simple quantum computing circuit simulator.
 (the implementation could be wrong though)   
 By Yiyi Wang
 
+```{javascript id:"j223kur3", require:["../dist/qubit.min.js"], hide:true}
+
+```
+
 <!-- slide vertical:true -->
 ## Example
 ```javascript
