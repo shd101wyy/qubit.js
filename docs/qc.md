@@ -33,7 +33,7 @@ console.log(qc.getResult()) // print probabilities
 <img src="http://i.imgur.com/AIEBx3T.png">
 
 <!-- slide vertical:true -->
-# 3 Qubtis
+# 3 Qubits
 8 possible quantum states  
 
 |q[2]q[1]q[0]   | 000 | 001 | 010 | 011 | 100 | 101| 110 | 111   
@@ -41,7 +41,7 @@ console.log(qc.getResult()) // print probabilities
 | amplitude | 1 | 0  | 0 | 0 | 0 | 0 | 0 | 0 |
 
 <!-- slide vertical:true -->
-# 3 Qubtis
+# 3 Qubits
 8 possible quantum states  
 
 |q[2]q[1]q[0]   | 000 | 001 | 010 | 011 | 100 | 101| 110 | 111   
